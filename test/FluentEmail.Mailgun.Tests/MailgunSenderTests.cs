@@ -131,7 +131,7 @@ namespace FluentEmail.Mailgun.Tests
                 .To(toEmail)
                 .Subject(subject)
                 .Body("<html>Inline image here: <img src=\"cid:logotest.png\">" +
-                "<p>You should see an image without an attachment, or without a download prompt, depending on the email client.</p></html>", true)
+                "<p>You should see an image without an attachment, or without a download prompt, dependig on the email client.</p></html>", true)
                 .Attach(attachment);
 
             var response = await email.SendAsync();
