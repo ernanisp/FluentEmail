@@ -114,7 +114,7 @@ namespace FluentEmail.Core
             }
             else
             {
-                Data.ToAddresses.Add(new Address(emailAddress.Trim(), name.Trim()));
+                Data.ToAddresses.Add(new Address(emailAddress.Trim(), name?.Trim()));
             }
             return this;
         }
@@ -460,13 +460,13 @@ namespace FluentEmail.Core
             return this;
         }
 
-        public IFluentEmail AttachFromFilename(string filename, string contentType = null)
+        public IFluentEmail AttachFromFilename(string filename,  string contentType = null, string attachmentName = null)
         {
             var stream = File.OpenRead(filename);
             Attach(new Attachment()
             {
                 Data = stream,
-                Filename = filename,
+                Filename = attachmentName ?? filename,
                 ContentType = contentType
             });
 

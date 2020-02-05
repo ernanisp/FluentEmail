@@ -1,30 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Send emails via MailGun using their REST API</Description>
-    <AssemblyTitle>Fluent Email - MailGun</AssemblyTitle>
-    <Authors>Luke Lowrey;Ben Cull;Github Contributors</Authors>
-    <AssemblyName>FluentEmail.Mailgun</AssemblyName>
-    <PackageId>FluentEmail.Mailgun</PackageId>
-    <PackageTags>email;razor;mailgun;fluent;fluentemail</PackageTags>
+    <Description>Send emails via MailKit. The SmtpClient has been deprecated and Microsoft recommends using MailKit instead.</Description>
+    <AssemblyTitle>Fluent Email - MailKit</AssemblyTitle>
+    <Authors>Luke Lowrey;Ben Cull;Matt Rutledge;Github Contributors</Authors>
+    <AssemblyName>FluentEmail.MailKit</AssemblyName>
+    <PackageId>FluentEmail.MailKit</PackageId>
+    <PackageTags>email;razor;smtp;mailkit;fluent;fluentemail</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/lukencode/FluentEmail</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
 
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>FluentEmail.MailKitSmtp</RootNamespace>
     <Version>2.7.0</Version>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\FluentEmail.Core\FluentEmail.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.1.4" />
+  </ItemGroup>
   <Target Name="PostcompileScript" AfterTargets="Build">
     <Exec Command="dotnet pack --no-build --configuration $(Configuration)" />
   </Target>
-
 </Project>
