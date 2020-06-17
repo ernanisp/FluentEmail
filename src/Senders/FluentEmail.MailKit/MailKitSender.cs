@@ -5,6 +5,7 @@ using MailKit.Net.Smtp;
 using MimeKit;
 using System;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -166,10 +167,13 @@ namespace FluentEmail.MailKitSmtp
         {
             var data = email.Data;
 
-            MimeMessage message = new MimeMessage
+            var message = new MimeMessage
             {
                 Subject = data.Subject ?? string.Empty
             };
+
+            message.Headers.Add(HeaderId.Subject, Encoding.UTF8, data.Subject ?? string.Empty);
+            message.Headers.Add(HeaderId.Encoding, Encoding.UTF8.EncodingName);
 
             message.From.Add(new MailboxAddress(data.FromAddress.Name, data.FromAddress.EmailAddress));
 
@@ -190,7 +194,8 @@ namespace FluentEmail.MailKitSmtp
 
             data.Attachments.ForEach(x =>
             {
-                builder.Attachments.Add(x.Filename, x.Data, ContentType.Parse(x.ContentType));
+                var attachment = builder.Attachments.Add(x.Filename, x.Data, ContentType.Parse(x.ContentType));
+                attachment.ContentId = x.ContentId;
             });
 
 

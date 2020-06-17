@@ -11,22 +11,18 @@
     <PackageProjectUrl>https://github.com/lukencode/FluentEmail</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.7.0</Version>
+    <Version>2.8.0</Version>
     <AssemblyVersion>2.7.0.0</AssemblyVersion>
     <FileVersion>2.7.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="RazorLight" Version="2.0.0-beta1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\FluentEmail.Core\FluentEmail.Core.csproj" />
   </ItemGroup>
-
-  <Target Name="PostcompileScript" AfterTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true' ">
-    <Exec Command="dotnet pack --no-build --configuration $(Configuration)" />
-  </Target>
-
+  
 </Project>
