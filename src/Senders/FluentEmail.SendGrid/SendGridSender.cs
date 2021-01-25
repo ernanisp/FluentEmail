@@ -46,11 +46,15 @@ namespace FluentEmail.SendGrid
             if (email.Data.BccAddresses.Any(a => !string.IsNullOrWhiteSpace(a.EmailAddress)))
                 mailMessage.AddBccs(email.Data.BccAddresses.Select(ConvertAddress).ToList());
 
+            if (email.Data.ReplyToAddresses.Any(a => !string.IsNullOrWhiteSpace(a.EmailAddress)))
+                // SendGrid does not support multiple ReplyTo addresses
+                mailMessage.SetReplyTo(email.Data.ReplyToAddresses.Select(ConvertAddress).First());
+
             mailMessage.SetSubject(email.Data.Subject);
 
             if (email.Data.Headers.Any())
             {
-                mailMessage.AddHeaders(email.Data.Headers);
+                mailMessage.AddHeaders(email.Data.Headers.ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
             }
 
             if (email.Data.IsHtml)
